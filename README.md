@@ -1,45 +1,85 @@
-# Real-Time Sign Language Recognition (ASL + Dynamic HELLO Gesture)
+# Sign Language to Speech
 
-## 📌 Overview
-This project implements a **real-time sign language recognition system** that detects both **static ASL letters** and a **dynamic HELLO gesture**.  
-It combines **MediaPipe** for hand tracking, a **custom-trained CNN** for static gesture classification, and a **motion-based algorithm** for the HELLO gesture.  
-The system is lightweight, runs on standard hardware, and features a **projector-friendly user interface** with a sentence builder and optional **text-to-speech** output.
+This project converts sign language gestures into speech using deep learning and computer vision.  
+It uses MediaPipe for hand tracking, TensorFlow/Keras for classification, and a Text-to-Speech (TTS) module for audio output.  
 
 ---
 
-## 🎯 Features
-- Recognition of **5 ASL letters**: `A`, `B`, `L`, `V`, `Y`
-- Detection of **dynamic HELLO gesture** using palm-open + left-to-right motion tracking
-- Real-time performance (~25–30 FPS on a MacBook Pro webcam)
-- High-contrast UI with:
-  - ROI box for consistent gesture placement
-  - Confidence bar and score display
-  - Sentence builder
-- Keyboard shortcuts:
-  - `SPACE` → Add space  
-  - `D` → Delete last letter  
-  - `S` → Speak sentence  
-  - `ESC` → Exit
+## Features
+- Detects and recognizes American Sign Language (ASL) hand gestures (A–Z).
+- Converts recognized gestures into corresponding text.
+- Outputs the text as speech in real-time.
+- Modular code: dataset collection, training, recognition, and TTS are separate scripts.
 
 ---
 
+## Installation
+
+STEP 1: CLONE THE REPOSITORY  
+git clone https://github.com/tabishkhan-dev/sign-language-to-speech.git  
+cd sign-language-to-speech  
+
+STEP 2: CREATE AND ACTIVATE A VIRTUAL ENVIRONMENT  
+python -m venv venv  
+source venv/bin/activate   # Mac/Linux  
+venv\Scripts\activate      # Windows  
+
+STEP 3: INSTALL DEPENDENCIES  
+pip install -r requirements.txt  
+
+STEP 4: RUN THE APPLICATION  
+python main.py  
 
 ---
 
-## ⚙️ Installation
+## Usage
 
-1. **Clone the repository**:
-```bash
-git clone https://gitlab.tu-ilmenau.de/<username>/<projectname>.git
-cd <projectname>
+CAPTURE NEW DATASET  
+python capture_dataset.py  
 
-python3 -m venv venv
-source venv/bin/activate   # Mac/Linux
-venv\Scripts\activate      # Windows
+TRAIN CUSTOM MODEL  
+python train_custom_model.py  
 
-pip install -r requirements.txt
+TRAIN ASL MODEL  
+python train_asl_model.py  
 
-running the application
-python main.py
+RUN REAL-TIME GESTURE RECOGNITION  
+python gesture_recognition.py  
+
+RUN TEXT TO SPEECH  
+python tts.py  
+
+---
+
+## Project Structure
+├── dataset/                # Collected gesture images  
+├── asl_classifier.py       # Model for classification  
+├── asl_model.h5            # Pretrained ASL model  
+├── asl_custom_model.h5     # Custom trained model  
+├── capture_dataset.py      # Script to collect dataset  
+├── train_custom_model.py   # Training script (custom model)  
+├── train_asl_model.py      # Training script (ASL model)  
+├── gesture_recognition.py  # Real-time gesture recognition  
+├── tts.py                  # Text-to-speech module  
+├── label_map.txt           # Class labels  
+├── main.py                 # Main execution file  
+└── README.md               # Documentation  
+
+---
+
+## Dataset## Dataset
+⚠️ The training dataset (SignMNIST) is not included in this repository due to size limits.  
+
+- Pre-trained models (`asl_model.h5`, `asl_custom_model.h5`) are already included, so the project runs without the dataset.  
+- If you want to re-train the models, you can download the dataset from [Kaggle: Sign Language MNIST](https://www.kaggle.com/datamunge/sign-language-mnist).  
 
 
+---
+
+## Contributing
+Feel free to fork this repository, submit pull requests, or open issues for suggestions and improvements.
+
+---
+
+## License
+This project is licensed under the MIT License.
