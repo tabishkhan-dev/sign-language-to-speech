@@ -1,0 +1,12 @@
+venv/
+__pycache__/
+*.pyc
+*.pyo
+*.dylib
+*.h5
+*.ckpt
+*.so
+*.zip
+# Large datasets
+*.csv
+
